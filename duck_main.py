@@ -1,5 +1,6 @@
 import sys
 import pygame
+import random   
 
 pygame.init()
 screen = pygame.display.set_mode((1280, 720))
@@ -12,11 +13,19 @@ cloud1 = pygame.image.load('Cloud1.png')
 cloud2 = pygame.image.load('Cloud2.png')
 crosshair = pygame.image.load('crosshair.png')
 crosshair_rect = None
+duck_surface = pygame.image.load('duck.png')
 
 land_position_y = 510
 land_speed = 0.5
 water_position_y = 650
 water_speed = 2
+
+duck_list = []
+for duck in range(30):
+    duck_pos_x = random.randrange(50, 1200)
+    duck_pos_y = random.randrange(50, 600)
+    duck_rect = duck_surface.get_rect(center = (duck_pos_x, duck_pos_y))
+    duck_list.append(duck_rect)
 
 while True:
     for event in pygame.event.get():
@@ -27,8 +36,7 @@ while True:
             crosshair_rect = crosshair.get_rect(center = event.pos)
 
 
-    #Background
-    
+    #Backgrounds
     screen.blit(wood_bg, (0, 0))
     land_position_y += land_speed
     water_position_y += water_speed
@@ -42,8 +50,9 @@ while True:
     screen.blit(land_bg, (0, land_position_y))
     screen.blit(water_bg, (0, water_position_y))
 
-
-
+    #duckz
+    for duck_rect in duck_list:
+        screen.blit(duck_surface, duck_rect)
 
     #Clouds
     screen.blit(cloud1, (900, 123))
