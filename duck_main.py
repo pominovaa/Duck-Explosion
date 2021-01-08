@@ -14,6 +14,10 @@ cloud2 = pygame.image.load('Cloud2.png')
 crosshair = pygame.image.load('crosshair.png')
 crosshair_rect = None
 duck_surface = pygame.image.load('duck.png')
+gun_shot = pygame.mixer.Sound('gun_shot.wav')
+duckduck = pygame.mixer.Sound('mixkit-battle-man-scream-2175.wav')
+duuck = pygame.mixer.Sound('g3sg1_boltpull.wav')
+
 
 game_font = pygame.font.Font(None, 70)
 text_surface = game_font.render('You Win :D', True, (5, 255, 0))
@@ -39,9 +43,13 @@ while True:
             crosshair_rect = crosshair.get_rect(center = event.pos)
 
         if event.type == pygame.MOUSEBUTTONDOWN:
+            gun_shot.play()
             for index, duck_rect in enumerate(duck_list):
                 if crosshair_rect.colliderect(duck_rect):
                     del duck_list[index]
+                    duckduck.play()
+                    
+                    
 
 
     #Backgrounds
