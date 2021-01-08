@@ -15,13 +15,16 @@ crosshair = pygame.image.load('crosshair.png')
 crosshair_rect = None
 duck_surface = pygame.image.load('duck.png')
 
+game_font = pygame.font.Font(None, 70)
+text_surface = game_font.render('You Win :D', True, (5, 255, 0))
+
 land_position_y = 510
 land_speed = 0.5
 water_position_y = 650
 water_speed = 2
 
 duck_list = []
-for duck in range(30):
+for duck in range(3000):
     duck_pos_x = random.randrange(50, 1200)
     duck_pos_y = random.randrange(50, 600)
     duck_rect = duck_surface.get_rect(center = (duck_pos_x, duck_pos_y))
@@ -55,9 +58,13 @@ while True:
     screen.blit(land_bg, (0, land_position_y))
     screen.blit(water_bg, (0, water_position_y))
 
+ 
+
     #duckz
     for duck_rect in duck_list:
         screen.blit(duck_surface, duck_rect)
+    
+    
 
     #Clouds
     screen.blit(cloud1, (900, 123))
@@ -73,6 +80,10 @@ while True:
     screen.blit(cloud1, (111, 111))
     screen.blit(cloud2, (987, 98))
     screen.blit(cloud1, (498, 43))
+    
+    if len(duck_list) <= 0:
+        screen.blit(text_surface, (550, 360))
+
 
     #crosshair
     if crosshair_rect is not None:
