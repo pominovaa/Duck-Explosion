@@ -5,6 +5,7 @@ import random
 pygame.init()
 screen = pygame.display.set_mode((1280, 720))
 clock = pygame.time.Clock()
+pygame.mouse.set_visible(False)
 
 wood_bg = pygame.image.load('Wood_BG.png')
 land_bg = pygame.image.load('Land_BG.png')
@@ -28,7 +29,7 @@ water_position_y = 650
 water_speed = 2
 
 duck_list = []
-for duck in range(3000):
+for duck in range(30):
     duck_pos_x = random.randrange(50, 1200)
     duck_pos_y = random.randrange(50, 600)
     duck_rect = duck_surface.get_rect(center = (duck_pos_x, duck_pos_y))
@@ -45,7 +46,7 @@ while True:
         if event.type == pygame.MOUSEBUTTONDOWN:
             gun_shot.play()
             for index, duck_rect in enumerate(duck_list):
-                if crosshair_rect.colliderect(duck_rect):
+                if duck_rect.collidepoint(event.pos):
                     del duck_list[index]
                     duckduck.play()
                     
